@@ -17,8 +17,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Pedido {
 	
 	@Id
@@ -39,45 +43,6 @@ public class Pedido {
 	@JoinColumn(name="FK_CLIENTE")
 	private Cliente cliente;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getHoraRealizado() {
-		return horaRealizado;
-	}
-
-	public void setHoraRealizado(String horaRealizado) {
-		this.horaRealizado = horaRealizado;
-	}
-
-	public String getHoraReserva() {
-		return horaReserva;
-	}
-
-	public void setHoraReserva(String horaReserva) {
-		this.horaReserva = horaReserva;
-	}
-
-	public Set<Contiene> getContiene() {
-		return contiene;
-	}
-
-	public void setContiene(Set<Contiene> contiene) {
-		this.contiene = contiene;
-	}
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 	
 	
 }

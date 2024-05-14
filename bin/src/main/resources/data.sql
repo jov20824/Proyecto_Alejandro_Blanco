@@ -10,20 +10,14 @@ insert into pedido(hora_realizado,hora_reserva,FK_CLIENTE) values ('Mieres','La 
 insert into pedido(hora_realizado,hora_reserva,FK_CLIENTE) values ('Marcos','Xuanxe',1);
 
 
-insert into plato(nombre,descripcion,precio,foto) values 
-('Cocido mierense','Muy rico',6.99,'a');
-insert into plato(nombre,descripcion,precio,foto) values 
-('Cocido Felguerino','Muy rico',2.50,'a');
-insert into plato(nombre,descripcion,precio,foto) values 
-('Cocido Karatraba','Muy rico',9.95,'a');
-insert into plato(nombre,descripcion,precio,foto) values 
-('Cocido SanCloyano','Muy rico',5.00,'a');
-insert into plato(nombre,descripcion,precio,foto) values 
-('Filete Seresco','Muy rico',5.00,'a');
-insert into plato(nombre,descripcion,precio,foto) values 
-('Anchoas del piles','Muy rico',5.00,'a');
-insert into plato(nombre,descripcion,precio,foto) values 
-('Rata al Avilés','Muy rico',5.00,'a');
+insert into plato(nombre,descripcion,foto) values 
+('Cocido mierense','Muy rico','a');
+insert into plato(nombre,descripcion,foto) values 
+('Cocido Felguerino','Muy rico','a');
+insert into plato(nombre,descripcion,foto) values 
+('Cocido Karatraba','Muy rico','a');
+insert into plato(nombre,descripcion,foto) values 
+('Cocido Madrileño','Muy rico','a');
 
 insert into contiene(pedido_id,plato_id,cantidad) values (1,1,3);
 insert into contiene(pedido_id,plato_id,cantidad) values (1,2,1);

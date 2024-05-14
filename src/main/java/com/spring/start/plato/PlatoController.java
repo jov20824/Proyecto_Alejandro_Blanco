@@ -4,99 +4,52 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class PlatoController {
 
-	@Autowired PlatoDAO platoDAO;
+	@Autowired 
+	PlatoDAO platoDAO;
 	
 	@GetMapping("/plato")
-	public ModelAndView tutorias() {
-
-		ModelAndView model = new ModelAndView();
-		model.setViewName("platos");
-		
-		List<Plato> platos = (List<Plato>) platoDAO.findAll();
-		model.addObject("platos", platos);
-		
-		return model;
+	public List<Plato> platos() {
+		return (List<Plato>) platoDAO.findAll();
 	}
-	
-
-	
-	
 	
 	@GetMapping("/plato/{id}")
-	public ModelAndView tutoria(@PathVariable long id) {
-		
-		Plato plato = platoDAO.findById(id).get();
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName("plato");
-		model.addObject("plato", plato);
-		
-		return model;
+	public Optional<Plato> plato(@PathVariable long id) {
+		return platoDAO.findById(id);
 	}
 	
-	@GetMapping("/plato/add")
-	public ModelAndView addPlan() {
-				
-		ModelAndView model = new ModelAndView();
-		Plato plato = new Plato();
-		model.addObject("plato", plato);
-		
-		model.setViewName("formPlato");
-		
-		return model;
-	}	
-	
 	@PostMapping("/plato/save")
-	public ModelAndView formTutoria(@ModelAttribute Plato plato) {
-	
-
-		
-		Plato platoGuardado = platoDAO.save(plato);
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName("redirect:/plato");	
-		
-		return model;
+	public Plato savePlato(@RequestBody Plato plato) {
+		return platoDAO.save(plato);
 	}	
 	
-
-	
-	@GetMapping("/plato/edit/{id}")
-	public ModelAndView editPlan(@PathVariable long id) {
-				
-		ModelAndView model = new ModelAndView();
+	@PutMapping("/plato/edit/{id}")
+	public Plato editPlato(@PathVariable long id) {
 		
 		Optional<Plato> platin = platoDAO.findById(id);
+
 		
 		if(platin.isPresent()) {
 			Plato plato = platin.get();
-			model.addObject("plato", plato);
-			model.setViewName("formPlato");
-			platoDAO.save(plato);
+			return platoDAO.save(plato);
 		}
-		else model.setViewName("redirect:/plato");	
 		
-		return model;
+		return null;	
+		
 	}
 	
-	@GetMapping("/plato/del/{id}")
-	public ModelAndView delPlan(@PathVariable long id) {
-				
+	@DeleteMapping("/plato/del/{id}")
+	public void delPlato(@PathVariable long id) {
 		platoDAO.deleteById(id);
-		
-		ModelAndView model = new ModelAndView();
-		model.setViewName("redirect:/plato");
-		
-		return model;
 	}
 }
